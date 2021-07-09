@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Colors from '../../res/Colors'
 import Login from '../Login/Login'
-import {View,Text} from 'react-native'
+import Signup from '../Signup/Signup'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +18,7 @@ const ProjectStack = () => {
       }}
     >
       <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+      <Stack.Screen name="Signup" component={Signup} options={{headerShown:false}}/>
     </Stack.Navigator>
     
   )

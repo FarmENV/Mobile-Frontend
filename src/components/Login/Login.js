@@ -1,6 +1,5 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,StatusBar,TextInput,TouchableOpacity} from 'react-native'
-import Login_hero from '../../res/images/login_hero.png'
 import Logo from '../../res/images/farmlogo.png'
 import Colors from '../../res/Colors'
 
@@ -8,9 +7,13 @@ const imageBackground = {
   uri: 'https://www.abc4.com/wp-content/uploads/sites/4/2021/02/GettyImages-862701736.jpg?w=876&h=493&crop=1',
 }
 
-class BadgesLanding extends React.Component {
-  handlePress = () => {
-    
+class Login extends React.Component {
+  handlePressBtn = () => {
+    this.props.navigation.replace('Signup')
+  }
+
+  handlePressHere = () => {
+    this.props.navigation.replace('Signup')
   }
 
   render(){
@@ -29,12 +32,13 @@ class BadgesLanding extends React.Component {
             <Text style={styles.inputText}>Password</Text>
             <TextInput
               style={styles.input}
+              secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.submit}>
+            <TouchableOpacity style={styles.submit} onPress={this.handlePressBtn}>
               <Text style={styles.submitText}>Log In</Text>
             </TouchableOpacity>
             <Text style={styles.signup_text}>You don't have an account?</Text>
-            <Text style={styles.signup_text}>Sign up <Text style={styles.here}>here</Text></Text>
+            <TouchableOpacity onPress={this.handlePressHere}><Text style={styles.here}>Sign up here</Text></TouchableOpacity>
           </View>
         </View>
       </View>
@@ -87,10 +91,10 @@ const styles = StyleSheet.create({
   },
   submit:{
     marginVertical:30,
-    marginHorizontal:110,
-    width:'30%',
+    marginHorizontal:80,
+    width:'50%',
     borderWidth:1,
-    borderRadius:10,
+    borderRadius:20,
     backgroundColor:Colors.green
   },
   submitText:{
@@ -102,11 +106,14 @@ const styles = StyleSheet.create({
   },
   signup_text: {
     color:Colors.white,
-    alignSelf:'center'
+    alignSelf:'center',
+    fontSize:20,
   },
   here: {
-    color:Colors.yellow
+    color:Colors.yellow,
+    alignSelf:'center',
+    fontSize:20,
   }
 })
 
-export default BadgesLanding
+export default Login
