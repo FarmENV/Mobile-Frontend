@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
-import ProjectStack from './src/components/ProjectScreen/ProjectStack'
+import AppStack from './src/components/AppNavigator/AppStack';
 
 const App = () => {
   return <NavigationContainer>
-    <ProjectStack/>
+    <AppStack/>
   </NavigationContainer>;
 }
 

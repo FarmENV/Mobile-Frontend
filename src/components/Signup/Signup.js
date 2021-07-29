@@ -1,6 +1,6 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,StatusBar,TextInput,TouchableOpacity, ImageBackground, ScrollView} from 'react-native'
-import Logo from '../../res/images/farmlogo.png'
+import Logo from '../../assets/farmlogo.png'
 import Colors from '../../res/Colors'
 
 const imageBackground = {

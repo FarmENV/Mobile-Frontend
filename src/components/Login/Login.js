@@ -1,6 +1,6 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,StatusBar,TextInput,TouchableOpacity} from 'react-native'
-import Logo from '../../res/images/farmlogo.png'
+import Logo from '../../assets/farmlogo.png'
 import Colors from '../../res/Colors'
 
 const imageBackground = {
@@ -9,7 +9,7 @@ const imageBackground = {
 
 class Login extends React.Component {
   handlePressBtn = () => {
-    this.props.navigation.replace('Signup')
+    this.props.navigation.navigate('Sensors')
   }
 
   handlePressHere = () => {
