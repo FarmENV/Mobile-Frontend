@@ -4,6 +4,7 @@ import Colors from '../../res/Colors'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
 import EnvironmentHome from '../EnvironmentHome/EnvironmentHome'
+import NewEnvironment from '../EnvironmentHome/NewEnvironment'
 import EnvironmentProfile from '../EnvironmentProfile/EnvironmentProfile'
 import EnvironmentSettings from '../EnvironmentSettings/EnvironmentSettings'
 import UserProfile from './UserProfile'
@@ -33,6 +34,7 @@ const ProfileStack = () => {
       <Stack.Screen name="EnvironmentSettings" component={EnvironmentSettings} options={{title:'Environment Profile'}}/>
       <Stack.Screen name="EnvironmentProfile" component={EnvironmentProfile} options={{title:'Environment Profile'}}/>
       <Stack.Screen name="EnvironmentHome" component={EnvironmentHome} options={{title:'Home'}}/>
+      <Stack.Screen name="NewEnvironment" component={NewEnvironment} options={{title:'Create Environment'}}/>
     </Stack.Navigator>
     
   )
