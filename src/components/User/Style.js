@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontSize:25,
     margin:10,
     color:Colors.white,
-    textAlign:'center'
+    textAlign:'center',
   },
   help:{
     height:25,

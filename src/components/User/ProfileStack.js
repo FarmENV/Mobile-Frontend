@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Colors from '../../res/Colors'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
+import EnvironmentHome from '../EnvironmentHome/EnvironmentHome'
 import EnvironmentProfile from '../EnvironmentProfile/EnvironmentProfile'
 import EnvironmentSettings from '../EnvironmentSettings/EnvironmentSettings'
 import UserProfile from './UserProfile'
@@ -31,6 +32,7 @@ const ProfileStack = () => {
       <Stack.Screen name="PasswordChange" component={PasswordChange} options={{title:'Profile Settings'}}/>
       <Stack.Screen name="EnvironmentSettings" component={EnvironmentSettings} options={{title:'Environment Profile'}}/>
       <Stack.Screen name="EnvironmentProfile" component={EnvironmentProfile} options={{title:'Environment Profile'}}/>
+      <Stack.Screen name="EnvironmentHome" component={EnvironmentHome} options={{title:'Home'}}/>
     </Stack.Navigator>
     
   )
