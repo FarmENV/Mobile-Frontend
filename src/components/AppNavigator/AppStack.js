@@ -20,8 +20,8 @@ const AppStack = () => {
         headerTintColor: Colors.white,
       }}
     >
-      <Stack.Screen name='SensorsTabNavigator' component={SensorsTabNavigator} />
       <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='SensorsTabNavigator' component={SensorsTabNavigator} />
       <Stack.Screen name='Signup' component={Signup} />
     </Stack.Navigator>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import {View,Text,StyleSheet,Image,StatusBar,TextInput,TouchableOpacity} from 'react-native'
 import Logo from '../../assets/farmlogo.png'
+import UserSession from '../../libs/sessions'
 import Colors from '../../res/Colors'
 
 const imageBackground = {
@@ -8,8 +9,44 @@ const imageBackground = {
 }
 
 class Login extends React.Component {
-  handlePressBtn = () => {
-    this.props.navigation.navigate('Sensors')
+
+  state = {
+    loading:false,
+    error:null,
+    user:undefined,
+    form:{}
+  }
+
+  componentDidMount = () => {
+    this.deleteTokens()
+  }
+
+  deleteTokens = async () => {
+    await UserSession.instance.logout()
+  }
+
+  handleSubmit = async () => {
+    try {
+      this.setState({loading:true, error:null, user:undefined})
+      let response = await UserSession.instance.login(this.state.form)
+      console.log(response)
+      if (typeof response === 'object'){
+        console.log(response)
+        if (response["Login Error"]){
+          var message = "Account is not verified."
+        } else {
+          var message = "Invalid credentials. Try again."
+        }
+        this.setState({loading:false, error: message, user: undefined})
+      }else {
+        this.setState({loading:false, error: null, user:response})
+      }
+    } catch (err) {
+      this.setState({loading:false, error:err})
+    }
+    if(this.state.user){
+      this.props.navigation.replace('SensorsTabNavigator')
+    }
   }
 
   handlePressHere = () => {
@@ -27,14 +64,29 @@ class Login extends React.Component {
             <Text style={styles.inputText}>Email</Text>
             <TextInput
               style={styles.input}
-              placeholder="Email"
+              placeholder="Username"
+              onChangeText={text => {
+                this.setState(prevState => {
+                  let form = Object.assign({}, prevState.form)
+                  form.username = text
+                  return {form}
+                })
+              }}
             />
             <Text style={styles.inputText}>Password</Text>
             <TextInput
               style={styles.input}
+              placeholder="password"
               secureTextEntry={true}
+              onChangeText={text => {
+                this.setState(prevState => {
+                  let form = Object.assign({}, prevState.form)
+                  form.password = text
+                  return {form}
+                })
+              }}
             />
-            <TouchableOpacity style={styles.submit} onPress={this.handlePressBtn}>
+            <TouchableOpacity style={styles.submit} onPress={this.handleSubmit}>
               <Text style={styles.submitText}>Log In</Text>
             </TouchableOpacity>
             <Text style={styles.signup_text}>You don't have an account?</Text>

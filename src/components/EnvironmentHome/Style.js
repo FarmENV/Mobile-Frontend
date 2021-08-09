@@ -138,6 +138,11 @@ const styles = StyleSheet.create({
     backgroundColor:Colors.white,
     marginHorizontal:30,
   },
+  list: {
+    width: '100%',
+    height: 'auto',
+    paddingHorizontal: 10,
+  },
 })
 
 export default styles

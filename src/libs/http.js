@@ -22,6 +22,17 @@ class Http {
         throw Error(error)
     }
   }
+
+  get_measurements = async arduino_id => {
+    try {
+      let request = await fetch(`${URLS.sensors_url}/system/${arduino_id}`)
+      let response = await request.json()
+      return response
+    }catch (error) {
+      console.log('HTTP get measurements method error', error)
+      throw Error(error)
+    }
+  }
 }
 
 export default Http

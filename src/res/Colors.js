@@ -4,7 +4,8 @@ const Colors = {
   blackPearl:'#20252c',
   green:'#4E7626',
   yellow:'#F0D08A',
-  buttonBrown: '#471B03'
+  buttonBrown: '#471B03',
+  red:'#ff0000',
 }
 
 export default Colors

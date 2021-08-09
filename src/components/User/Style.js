@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   button:{
-    marginVertical:20,
+    marginVertical:15,
     alignSelf:'center',
     width: 250,
     borderWidth:1,
@@ -111,6 +111,21 @@ const styles = StyleSheet.create({
     minWidth:150,
     fontWeight:'bold'
   },
+  cameraContainer:{
+    position:'absolute',
+    left:270,
+    top:200,
+    backgroundColor:Colors.white,
+    borderRadius:10,
+    borderWidth:1,
+    borderColor:Colors.blackPearl,
+    width:53,
+  },
+  names:{
+    fontSize:32,
+    fontWeight:'bold',
+    alignSelf:'center'
+  }
 })
 
 export default styles
