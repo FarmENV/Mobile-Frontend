@@ -4,6 +4,7 @@ import styles from './Style.js'
 import Loader from '../Generics/Loader'
 import SensorItem from './SensorItem.js'
 import Http from '../../libs/http'
+import { Linking } from 'react-native'
 
 class Sensors extends React.Component{
   
@@ -68,7 +69,7 @@ class Sensors extends React.Component{
           )}
           keyExtractor={(item,index) => index.toString()}
         />
-        <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText}>Obtén tu kit</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText} onPress={() => Linking.openURL('https://pedantic-panini-9d6199.netlify.app/contact')}>Obtén tu kit</Text></TouchableOpacity>
       </View>
     )
   }
