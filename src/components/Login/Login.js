@@ -15,6 +15,7 @@ class Login extends React.Component {
     loading:false,
     error:null,
     user:undefined,
+    isPasswordVisible: true,
     form:{}
   }
 
@@ -50,12 +51,20 @@ class Login extends React.Component {
     }
   }
 
+  ToggleisPasswordVisible = () => {
+    if(this.state.isPasswordVisible){
+        this.setState({isPasswordVisible: false});
+    } else {
+        this.setState({isPasswordVisible: true});
+    }
+  };
+
   handlePressHere = () => {
     this.props.navigation.navigate('Signup')
   }
 
   render(){
-    const {error, loading} = this.state
+    const {error, loading, isPasswordVisible} = this.state
     if (loading === true){
       return <Loader/>
     }
@@ -88,10 +97,11 @@ class Login extends React.Component {
               }}
             />
             <Text style={styles.inputText}>Contraseña</Text>
+            <View style={styles.passwordRow}>
             <TextInput
-              style={styles.input}
+              style={styles.inputPassword}
+              secureTextEntry={isPasswordVisible}
               placeholder="Contraseña"
-              secureTextEntry={true}
               onChangeText={text => {
                 this.setState(prevState => {
                   let form = Object.assign({}, prevState.form)
@@ -100,6 +110,17 @@ class Login extends React.Component {
                 })
               }}
             />
+            <TouchableOpacity onPress={this.ToggleisPasswordVisible }>
+                                        <Image 
+                                            style={{marginRight: 10}}
+                                            source={
+                                                isPasswordVisible
+                                                ? require('../../assets/view.png')
+                                                : require('../../assets/hide.png')
+                                            }
+                                        />
+                                    </TouchableOpacity>
+                                    </View>
             <TouchableOpacity style={styles.submit} onPress={this.handleSubmit}>
               <Text style={styles.submitText}>Iniciar{'\n'}sesión</Text>
             </TouchableOpacity>
@@ -149,7 +170,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 10,
     borderColor: Colors.green,
-    backgroundColor:Colors.white
+    backgroundColor:Colors.white,
   },
   form:{
     
@@ -191,6 +212,20 @@ const styles = StyleSheet.create({
   warningText:{
     color:Colors.white
   },
+  passwordRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    borderWidth: 5,
+    borderRadius: 10,
+    borderColor: Colors.green,
+    backgroundColor:Colors.white,
+  },
+  inputPassword:{
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    
+  }
 })
 
 export default Login

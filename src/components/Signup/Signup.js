@@ -16,6 +16,8 @@ class Signup extends React.Component {
     error:false,
     errors:[],
     user:undefined,
+    isPasswordVisible: true,
+    isPasswordConfVisible: true,
     form:{}
   }
 
@@ -64,12 +66,28 @@ class Signup extends React.Component {
     }
   }
 
+  ToggleisPasswordVisible = () => {
+    if (this.state.isPasswordVisible) {
+        this.setState({isPasswordVisible : false});
+    } else {
+        this.setState({isPasswordVisible: true});
+    }
+  };
+
+  ToggleisPasswordConfVisible = () => {
+    if (this.state.isPasswordConfVisible) {
+        this.setState({isPasswordConfVisible : false});
+    } else {
+        this.setState({isPasswordConfVisible: true});
+    }
+  };
+
   handlePressHere = () => {
     this.props.navigation.replace('Login')
   }
 
   render() {
-    const {errors, error, loading} = this.state
+    const {errors, error, loading, isPasswordVisible, isPasswordConfVisible,} = this.state
     if (loading === true){
       return <Loader/>
     }
@@ -135,9 +153,10 @@ class Signup extends React.Component {
                 }}
               />
               <Text style={styles.inputText}>Constraseña</Text>
+              <View style={styles.passwordRow}>
               <TextInput
-                style={styles.input}
-                secureTextEntry={true}
+                style={styles.inputPassword}
+                secureTextEntry={isPasswordVisible}
                 placeholder="Constraseña"
                 onChangeText={text => {
                   this.setState(prevState => {
@@ -147,10 +166,22 @@ class Signup extends React.Component {
                   })
                 }}
               />
+              <TouchableOpacity onPress={this.ToggleisPasswordVisible}>
+                  <Image 
+                      style={{marginRight: 10}}
+                      source={
+                          isPasswordVisible
+                          ? require('../../assets/view.png')
+                          : require('../../assets/hide.png')
+                      }
+                  />
+              </TouchableOpacity>
+              </View>
               <Text style={styles.inputText}>Confirmar constraseña</Text>
+              <View style={styles.passwordRow}>
               <TextInput
-                style={styles.input}
-                secureTextEntry={true}
+                style={styles.inputPassword}
+                secureTextEntry={isPasswordConfVisible}
                 placeholder="Confirmar constraseña"
                 onChangeText={text => {
                   this.setState(prevState => {
@@ -160,6 +191,17 @@ class Signup extends React.Component {
                   })
                 }}
               />
+              <TouchableOpacity onPress={this.ToggleisPasswordConfVisible}>
+                                        <Image 
+                                            style={{marginRight: 10}}
+                                            source={
+                                                isPasswordConfVisible
+                                                ? require('../../assets/view.png')
+                                                : require('../../assets/hide.png')
+                                            }
+                                        />
+                                    </TouchableOpacity>
+                                    </View>
               <TouchableOpacity style={styles.submit} onPress={this.handleSubmit}>
                 <Text style={styles.submitText}>Registrarse</Text>
               </TouchableOpacity>
@@ -253,6 +295,20 @@ const styles = StyleSheet.create({
   warningText:{
     color:Colors.white
   },
+  passwordRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    borderWidth: 5,
+    borderRadius: 10,
+    borderColor: Colors.green,
+    backgroundColor:Colors.white,
+  },
+  inputPassword:{
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    
+  }
 })
 
 export default Signup
