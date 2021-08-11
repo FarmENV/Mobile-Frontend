@@ -12,6 +12,8 @@ class UsernameChange extends React.Component {
     },
     token: '',
     loading:false,
+    error:null,
+    flag:false
   }
 
   componentDidMount() {
@@ -21,22 +23,37 @@ class UsernameChange extends React.Component {
   getUserData = async () => {
     let user = await UserSession.instance.getUser()
     let token = await UserSession.instance.getToken(user.username)
-    console.log(user.id)
     this.setState({ user:user, token:token })
   }
 
   editProfile = async () => {
-    const {user, token, form} = this.state
-    let response = await UserSession.instance.editProfileUsername(
-      user.id,
-      token,
-      form,
-    )
-    console.log(response)
-    this.props.navigation.replace("SensorsTabNavigator")
+    const {user, token, form,flag} = this.state
+    if (form.username){
+      try {
+        let response = await UserSession.instance.editProfileUsername(
+          user.id,
+          token,
+          form,
+        )
+        console.log(response["username"])
+        if (response["username"] == 'Ya existe un usuario con este nombre.'){
+          var message = "Este Username ya está en uso."
+          this.setState({loading:false, error: message})
+        }else {
+          this.setState({loading:false, flag:true})
+          this.props.navigation.replace("SensorsTabNavigator")
+        }
+      } catch (error) {
+        console.log("edit profile error:", error)
+      }
+    } else {
+      var message = "El campo Nuevo Username debe contener un nombre de usuario."
+      this.setState({loading:false, error: message})
+    }
   }
 
   render(){
+    const {error} = this.state
     return(
       <ScrollView>
         <View style={styles.container}>
@@ -45,6 +62,13 @@ class UsernameChange extends React.Component {
               <Text style={styles.titleText}>Cambiar Username</Text>
             </View>
             <View style={styles.form}>
+              {error ? (
+                <View style={styles.warning}>
+                  <Text style={styles.warningText}>
+                    {error}
+                  </Text>
+                </View>
+              ) : null}
               <Text style={styles.labels}>Nuevo Username</Text>
               <TextInput 
                 style={styles.input} 
@@ -57,8 +81,6 @@ class UsernameChange extends React.Component {
                   })
                 }}
               ></TextInput>
-              <Text style={styles.labels}>Contraseña</Text>
-              <TextInput style={styles.input}  secureTextEntry={true} placeholder="Contraseña"></TextInput>
               <TouchableOpacity style={styles.buttonSmall} onPress={this.editProfile}>
                 <Text style={styles.buttonText}>Guardar</Text>
               </TouchableOpacity>

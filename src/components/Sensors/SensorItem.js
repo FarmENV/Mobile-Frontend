@@ -7,7 +7,7 @@ class SensorItem extends React.Component{
     const { item } = this.props
     return(
       <View style={styles.container}>
-        <TouchableOpacity>
+        
           <View style={styles.row}>
             <Image style={styles.sensorImage} source={{uri: `${item.img_url}`}}/>
             <View style={styles.separator}></View>
@@ -16,7 +16,7 @@ class SensorItem extends React.Component{
               <Text style={styles.sensorInfo}>{item.description}</Text>
             </View>
           </View>
-        </TouchableOpacity>
+        
       </View>
     )
   }

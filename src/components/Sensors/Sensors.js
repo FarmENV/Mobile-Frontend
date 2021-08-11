@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Text, View, StatusBar, FlatList} from 'react-native'
+import {Image, Text, View, StatusBar, FlatList, TouchableOpacity} from 'react-native'
 import styles from './Style.js'
 import Loader from '../Generics/Loader'
 import SensorItem from './SensorItem.js'
@@ -68,6 +68,7 @@ class Sensors extends React.Component{
           )}
           keyExtractor={(item,index) => index.toString()}
         />
+        <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText}>Obtén tu kit</Text></TouchableOpacity>
       </View>
     )
   }

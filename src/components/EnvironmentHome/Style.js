@@ -143,6 +143,17 @@ const styles = StyleSheet.create({
     height: 'auto',
     paddingHorizontal: 10,
   },
+  warning:{
+    padding:20,
+    marginBottom:20,
+    marginTop:20,
+    backgroundColor:"#C14242",
+    borderRadius:10,
+    flex:1,
+  },
+  warningText:{
+    color:Colors.white
+  },
 })
 
 export default styles

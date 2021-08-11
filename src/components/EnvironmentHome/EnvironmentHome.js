@@ -3,6 +3,7 @@ import {Text, TouchableOpacity, View, ScrollView, FlatList} from 'react-native'
 import styles from './Style'
 import UserSession from '../../libs/sessions'
 import EnvironmentItem from './EnvironmentItem'
+import Loader from '../Generics/Loader'
 
 
 class EnvironmentHome extends React.Component {
@@ -12,6 +13,8 @@ class EnvironmentHome extends React.Component {
     form:{},
     loading:false,
     envs: undefined,
+    loading:false,
+    has_env:true
   }
 
   componentDidMount() {
@@ -28,7 +31,7 @@ class EnvironmentHome extends React.Component {
   }
 
   fetchdata = async () => {
-    const {form} = this.state
+    const {form,} = this.state
     this.setState({ loading: true })
     let response = await UserSession.instance.getEnvironments(form)
     console.log(response)
@@ -43,11 +46,16 @@ class EnvironmentHome extends React.Component {
   }
 
   render(){
-    const {envs, user, form} = this.state
+    const {envs, form, loading, has_env} = this.state
+    if(loading===true){
+      return(
+        <Loader/>
+      )
+    }
     return(
       
       <View style={styles.container}>
-        <View style={styles.tittleContainer}><Text style={styles.Tittle}> Your Environments </Text></View>
+        <View style={styles.tittleContainer}><Text style={styles.Tittle}> Tus ambientes </Text></View>
         <FlatList
           style={styles.list}
           data={envs}
@@ -59,7 +67,7 @@ class EnvironmentHome extends React.Component {
           keyExtractor={(item, index) => index.toString()}
         />
         <TouchableOpacity style={styles.createButton} onPress={this.handleCreateEnvironment}>
-          <Text style={styles.createButtonText}>Create New Environment</Text>
+          <Text style={styles.createButtonText}>Crear nuevo ambiente</Text>
         </TouchableOpacity>
       </View>
       

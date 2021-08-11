@@ -63,7 +63,22 @@ const styles = StyleSheet.create({
     width:5,
     marginRight:8,
     borderColor:Colors.brown,
-  }
+  },
+  buttonText:{
+    fontSize:25,
+    margin:10,
+    color:Colors.white,
+    textAlign:'center',
+  },
+  buttonSmall:{
+    marginVertical:28,
+    marginTop:35,
+    alignSelf:'center',
+    width: 150,
+    borderWidth:1,
+    borderRadius:20,
+    backgroundColor:Colors.green,
+  },
 })
 
 export default styles

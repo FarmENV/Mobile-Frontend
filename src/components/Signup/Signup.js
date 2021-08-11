@@ -3,6 +3,7 @@ import {View,Text,StyleSheet,Image,StatusBar,TextInput,TouchableOpacity, ImageBa
 import Logo from '../../assets/farmlogo.png'
 import Colors from '../../res/Colors'
 import UserSession from '../../libs/sessions'
+import Loader from '../Generics/Loader'
 
 const imageBackground = {
   uri: 'https://besthqwallpapers.com/Uploads/12-11-2018/71528/thumb2-little-piggy-pink-piglet-funny-animals-farm-piggy.jpg'
@@ -28,9 +29,18 @@ class Signup extends React.Component {
         let cont = 0
         
         for(let error in response) {
+          console.log(response.email)
           let key = error
-          if(error==='non_field_errors'){
-            error = 'password'
+          if (error ==='username'){
+            error = 'Username'
+          }else if (error === 'last_name'){
+            error = 'Apellidos'
+          }else if (error === 'first_name'){
+            error = 'Nombre'
+          }else if (error === 'password'){
+            error = 'Contraseña'
+          }else if (error === 'password_confirmation'){
+            error = 'Confirmar contraseña'
           }
           _errors.push(
             <View key={cont}>
@@ -59,6 +69,10 @@ class Signup extends React.Component {
   }
 
   render() {
+    const {errors, error, loading} = this.state
+    if (loading === true){
+      return <Loader/>
+    }
     return(
       <ScrollView style={styles.container}>
         <StatusBar backgroundColor="transparent" translucent={true}/>
@@ -66,10 +80,15 @@ class Signup extends React.Component {
           <View style={styles.layerColor}>
             <Image style={styles.logo} source={Logo}/>
             <View style={styles.form}>
-              <Text style={styles.inputText}>First name</Text>
+            {error
+              ? <View style={styles.warning}>
+                  {errors}
+                </View>
+              : null }
+              <Text style={styles.inputText}>Nombre</Text>
               <TextInput
                 style={styles.input}
-                placeholder="First name"
+                placeholder="Nombre"
                 onChangeText={text => {
                   this.setState(prevState => {
                     let form = Object.assign({}, prevState.form)
@@ -78,10 +97,10 @@ class Signup extends React.Component {
                   })
                 }}
               />
-              <Text style={styles.inputText}>Last name</Text>
+              <Text style={styles.inputText}>Apellidos</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Last name"
+                placeholder="Apellidos"
                 onChangeText={text => {
                   this.setState(prevState => {
                     let form = Object.assign({}, prevState.form)
@@ -115,11 +134,11 @@ class Signup extends React.Component {
                   })
                 }}
               />
-              <Text style={styles.inputText}>Password</Text>
+              <Text style={styles.inputText}>Constraseña</Text>
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
-                placeholder="Password"
+                placeholder="Constraseña"
                 onChangeText={text => {
                   this.setState(prevState => {
                     let form = Object.assign({}, prevState.form)
@@ -128,11 +147,11 @@ class Signup extends React.Component {
                   })
                 }}
               />
-              <Text style={styles.inputText}>Password confirmation</Text>
+              <Text style={styles.inputText}>Confirmar constraseña</Text>
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
-                placeholder="Password confirmation"
+                placeholder="Confirmar constraseña"
                 onChangeText={text => {
                   this.setState(prevState => {
                     let form = Object.assign({}, prevState.form)
@@ -142,10 +161,8 @@ class Signup extends React.Component {
                 }}
               />
               <TouchableOpacity style={styles.submit} onPress={this.handleSubmit}>
-                <Text style={styles.submitText}>Sign up</Text>
+                <Text style={styles.submitText}>Registrarse</Text>
               </TouchableOpacity>
-              <Text style={styles.signup_text}>You don't have an account?</Text>
-              <TouchableOpacity onPress={this.handlePressHere}><Text style={styles.here}>Log in here</Text></TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
@@ -210,7 +227,7 @@ const styles = StyleSheet.create({
     backgroundColor:Colors.green
   },
   submitText:{
-    fontSize:30,
+    fontSize:25,
     margin:5,
     
     color:Colors.white,
@@ -225,7 +242,17 @@ const styles = StyleSheet.create({
     color:Colors.yellow,
     alignSelf:'center',
     fontSize:20,
-  }
+  },
+  warning:{
+    padding:20,
+    marginBottom:20,
+    backgroundColor:"#C14242",
+    borderRadius:10,
+    flex:1,
+  },
+  warningText:{
+    color:Colors.white
+  },
 })
 
 export default Signup

@@ -32,18 +32,26 @@ const styles = StyleSheet.create({
     color:Colors.white,
     textAlign:'center',
   },
-  help:{
-    height:25,
-    width:25
-  },
   buttonSmall:{
-    marginVertical:28,
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection:'row',
     marginTop:35,
     alignSelf:'center',
     width: 150,
     borderWidth:1,
     borderRadius:20,
     backgroundColor:Colors.green,
+  },
+  help:{
+    height:30,
+    width:30,
+    justifyContent:'center',
+  },
+  logout:{
+    height:40,
+    width:40,
+    justifyContent:'center',
   },
   subtitlesContainer:{
     height:102,
@@ -125,7 +133,18 @@ const styles = StyleSheet.create({
     fontSize:32,
     fontWeight:'bold',
     alignSelf:'center'
-  }
+  },
+  warning:{
+    padding:20,
+    marginBottom:20,
+    marginTop:20,
+    backgroundColor:"#C14242",
+    borderRadius:10,
+    flex:1,
+  },
+  warningText:{
+    color:Colors.white
+  },
 })
 
 export default styles

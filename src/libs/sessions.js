@@ -151,6 +151,26 @@ class UserSession {
     }
   }
 
+  editEnvironment = async (id, token, body) => {
+    try {
+      let request = await fetch(`${URLS.users_url}/env/${id}/`,{
+        method: 'PATCH',
+        headers:{
+          'Content-Type':'application/json',
+          Accept:'application/json',
+          Authorization:`Token ${token}`
+        },
+        body: JSON.stringify(body),
+      })
+      console.log(body)
+      
+      let response = await request.json()
+      return response
+    } catch (error) {
+      console.log('Edit environment error', error)
+    }
+  }
+
   getEnvironments = async () => {
     try {
       let request = await fetch(`${URLS.users_url}/env/`)
@@ -163,6 +183,24 @@ class UserSession {
     } catch (error) {
       console.log("get Environments error", error)
       throw Error(error)
+    }
+  }
+
+  deleteEnvironment = async (id, token) => {
+    try {
+      let request = await fetch(`${URLS.users_url}/env/${id}/`,{
+        method: 'DELETE',
+        headers:{
+          'Content-Type':'application/json',
+          Accept:'application/json',
+          Authorization:`Token ${token}`
+        },
+      })
+      
+      let response = await request.json()
+      return response
+    } catch (error) {
+      console.log('Edit environment error', error)
     }
   }
 }

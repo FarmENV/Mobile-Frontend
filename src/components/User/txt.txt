@@ -1,0 +1,6 @@
+<TouchableOpacity style={styles.button} >
+            <Text style={styles.buttonText} onPress={this.handleChangePassword}>Cambiar contraseña</Text>
+          </TouchableOpacity>
+
+<Text style={styles.labels}>Contraseña</Text>
+              <TextInput style={styles.input}  secureTextEntry={true} placeholder="Contraseña"></TextInput>

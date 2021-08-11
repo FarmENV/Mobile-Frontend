@@ -17,7 +17,7 @@ const SensorsStack = () => {
         headerTintColor: Colors.white,
       }}
       >
-      <Stack.Screen name="Sensors" component={Sensors} options={{title:'Kit of sensors'}}/>
+      <Stack.Screen name="Sensors" component={Sensors} options={{title:'Kit de sensores'}}/>
     </Stack.Navigator>
     
   )

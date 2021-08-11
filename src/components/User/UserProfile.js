@@ -1,8 +1,9 @@
 import React from 'react'
-import {Text, Image, TouchableOpacity, View, ScrollView} from 'react-native'
+import {Text, Image, TouchableOpacity, View, ScrollView, StatusBar} from 'react-native'
 import Colors from '../../res/Colors'
 import styles from './Style'
 import Help from '../../assets/information.png'
+import Logout from '../../assets/logout.png'
 import UserSession from '../../libs/sessions'
 import { launchImageLibrary } from 'react-native-image-picker'
 
@@ -68,13 +69,19 @@ class UserProfile extends React.Component {
     this.props.navigation.navigate("EnvironmentHome")
   }
 
+  logout = async () => {
+    await UserSession.instance.logout()
+    this.props.navigation.replace("Login")
+  }
+
   render(){
     const {user} = this.state
     console.log(user)
     return(
       <ScrollView>
-        <View style={styles.container}>
           <Image style={styles.image} source={{uri: `${user.profile.profile_picture}`}}/>
+        <View style={styles.container}>
+        <StatusBar backgroundColor="transparent" translucent={true}/>
           <Text style={styles.names}>{user.first_name} {user.last_name}</Text>
           <TouchableOpacity 
             style = {styles.cameraContainer}
@@ -88,13 +95,12 @@ class UserProfile extends React.Component {
           <TouchableOpacity style={styles.button} onPress={this.handleChangeUsername}>
             <Text style={styles.buttonText}>Cambiar Username</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} >
-            <Text style={styles.buttonText} onPress={this.handleChangePassword}>Cambiar contraseña</Text>
-          </TouchableOpacity>
+          
           <TouchableOpacity style={styles.button} >
             <Text style={styles.buttonText} onPress={this.handleEnvironmentsHome}>Ambientes</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText}>Ayuda <Image style={styles.help} source={Help}/></Text></TouchableOpacity>
+          <TouchableOpacity style={styles.buttonSmall} onPress={this.logout}><Text style={styles.buttonText}>Cerrar{'\n'}sesión</Text><Image style={styles.logout} source={Logout}/></TouchableOpacity>
+          <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText}>Ayuda</Text><Image style={styles.help} source={Help}/></TouchableOpacity>
         </View>
       </ScrollView>
     )

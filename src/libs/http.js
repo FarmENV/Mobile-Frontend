@@ -33,6 +33,19 @@ class Http {
       throw Error(error)
     }
   }
+
+  remove = async id => {
+    try {
+        let request = await fetch(`${URLS.sensors_url}/del/${id}/`,{
+            method:'DELETE',
+        })
+        let response = await request.json()
+        return response
+    } catch (err) {
+        console.log('HTTP delete method error', err)
+        throw Error(err)
+    }
+}
 }
 
 export default Http
