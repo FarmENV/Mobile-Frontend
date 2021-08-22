@@ -41,7 +41,7 @@ class UsernameChange extends React.Component {
           this.setState({loading:false, error: message})
         }else {
           this.setState({loading:false, flag:true})
-          this.props.navigation.replace("SensorsTabNavigator")
+          this.props.navigation.navigate("UserProfile")
         }
       } catch (error) {
         console.log("edit profile error:", error)

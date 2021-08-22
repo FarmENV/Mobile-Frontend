@@ -80,7 +80,7 @@ class UserProfile extends React.Component {
     console.log(user)
     return(
       <ScrollView>
-          <Image style={styles.image} source={{uri: `${user.profile.profile_picture}`}}/>
+          <Image style={styles.profileImage} source={{uri: `${user.profile.profile_picture}`}}/>
         <View style={styles.container}>
         <StatusBar backgroundColor="transparent" translucent={true}/>
           <Text style={styles.names}>{user.first_name} {user.last_name}</Text>
@@ -100,8 +100,14 @@ class UserProfile extends React.Component {
           <TouchableOpacity style={styles.button} >
             <Text style={styles.buttonText} onPress={this.handleEnvironmentsHome}>Ambientes</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonSmall} onPress={this.logout}><Text style={styles.buttonText}>Cerrar{'\n'}sesión</Text><Image style={styles.logout} source={Logout}/></TouchableOpacity>
-          <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText} onPress={() => Linking.openURL('https://pedantic-panini-9d6199.netlify.app/help')}>Ayuda</Text><Image style={styles.help} source={Help}/></TouchableOpacity>
+          <TouchableOpacity style={styles.buttonSmall} onPress={this.logout}>
+            <Text style={styles.buttonText}>Cerrar{'\n'}sesión</Text>
+            <Image style={styles.logout} source={Logout}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonSmall}>
+            <Text style={styles.buttonText} onPress={() => Linking.openURL('https://pedantic-panini-9d6199.netlify.app/helpCel')}>Ayuda</Text>
+            <Image style={styles.help} source={Help}/>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     )

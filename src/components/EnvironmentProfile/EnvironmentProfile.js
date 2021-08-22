@@ -81,6 +81,7 @@ class EnvironmentProfile extends React.Component {
       
     }
     this.setState({ loading: false, measurements: response })
+    not_found ? this.handleDeleteOrEdit() : null
   }
 
   handlePress = () => {
@@ -129,9 +130,6 @@ class EnvironmentProfile extends React.Component {
     }
     return(
       <View style={styles.container}>
-        {
-          not_found ? this.handleDeleteOrEdit() : null
-        }
         <View style={styles.content}>
           {
             environment.environment_type == 1 ? <Image style={styles.header} source={imageBackgroundChicken}/>
@@ -148,49 +146,58 @@ class EnvironmentProfile extends React.Component {
                 <Text style={styles.infoHeader}>Calidad de aire:</Text>
                 <Text style={styles.infoHeader}>Comida:</Text>
               </View>
-              <View>
-                {environment.environment_type == 1 ? (parseFloat(measurements.humidity) >= variables.maxVariables.chicken.humidity || 
-                parseFloat(measurements.humidity) <= variables.minVariables.chicken.humidity ? 
-                <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
-                : <Text style={styles.infoData}>{measurements.humidity}%</Text>) 
-                : environment.environment_type == 2 ? (parseFloat(measurements.humidity) >= variables.maxVariables.pigs.humidity || 
-                parseFloat(measurements.humidity) <= variables.minVariables.pigs.humidity ? 
-                <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
-                : <Text style={styles.infoData}>{measurements.humidity}%</Text>) 
-                : environment.environment_type == 3 ? (parseFloat(measurements.humidity) >= variables.maxVariables.horses.humidity || 
-                parseFloat(measurements.humidity) <= variables.minVariables.horses.humidity ? 
-                <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
-                : <Text style={styles.infoData}>{measurements.humidity}%</Text>) 
-                : (parseFloat(measurements.humidity) >= variables.maxVariables.cows.humidity || 
-                parseFloat(measurements.humidity) <= variables.minVariables.cows.humidity ? 
-                <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
-                : <Text style={styles.infoData}>{measurements.humidity}%</Text>) }
+              <View style={styles.containerDatas}>
 
-                {environment.environment_type == 1 ? (parseFloat(measurements.temp) >= variables.maxVariables.chicken.temp || 
-                parseFloat(measurements.temp) <= variables.minVariables.chicken.temp ? 
-                <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
-                : <Text style={styles.infoData}>{measurements.temp}°C</Text>) 
-                : environment.environment_type == 2 ? (parseFloat(measurements.temp) >= variables.maxVariables.pigs.temp || 
-                parseFloat(measurements.temp) <= variables.minVariables.pigs.temp ? 
-                <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
-                : <Text style={styles.infoData}>{measurements.temp}°C</Text>) 
-                : environment.environment_type == 3 ? (parseFloat(measurements.temp) >= variables.maxVariables.horses.temp || 
-                parseFloat(measurements.temp) <= variables.minVariables.horses.temp ? 
-                <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
-                : <Text style={styles.infoData}>{measurements.temp}°C</Text>) 
-                : (parseFloat(measurements.temp) >= variables.maxVariables.cows.temp || 
-                parseFloat(measurements.temp) <= variables.minVariables.cows.temp ? 
-                <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
-                : <Text style={styles.infoData}>{measurements.temp}°C</Text>) }
+                <View style={styles.containerData}>
+                  {environment.environment_type == 1 ? (parseFloat(measurements.humidity) >= variables.maxVariables.chicken.humidity || 
+                  parseFloat(measurements.humidity) <= variables.minVariables.chicken.humidity ? 
+                  <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
+                  : <Text style={styles.infoGood}>{measurements.humidity}%</Text>) 
+                  : environment.environment_type == 2 ? (parseFloat(measurements.humidity) >= variables.maxVariables.pigs.humidity || 
+                  parseFloat(measurements.humidity) <= variables.minVariables.pigs.humidity ? 
+                  <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
+                  : <Text style={styles.infoGood}>{measurements.humidity}%</Text>) 
+                  : environment.environment_type == 3 ? (parseFloat(measurements.humidity) >= variables.maxVariables.horses.humidity || 
+                  parseFloat(measurements.humidity) <= variables.minVariables.horses.humidity ? 
+                  <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
+                  : <Text style={styles.infoGood}>{measurements.humidity}%</Text>) 
+                  : (parseFloat(measurements.humidity) >= variables.maxVariables.cows.humidity || 
+                  parseFloat(measurements.humidity) <= variables.minVariables.cows.humidity ? 
+                  <Text style={styles.infoWarning}>{measurements.humidity}%</Text>
+                  : <Text style={styles.infoGood}>{measurements.humidity}%</Text>) }
+                </View>
 
-                {measurements.airQuality == "Buena" ? 
-                <Text style={styles.infoGood}>{measurements.airQuality}</Text>
-                : ( measurements.airQuality == "Regular" ? <Text style={styles.infoRegular}>{measurements.airQuality}</Text>
-                : (measurements.airQuality == "Mala" ? <Text style={styles.infoBad}>{measurements.airQuality}</Text>
-                : <Text style={styles.infoWarning}>{measurements.airQuality}</Text>))}
+                <View style={styles.containerData}>
+                  {environment.environment_type == 1 ? (parseFloat(measurements.temp) >= variables.maxVariables.chicken.temp || 
+                  parseFloat(measurements.temp) <= variables.minVariables.chicken.temp ? 
+                  <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
+                  : <Text style={styles.infoGood}>{measurements.temp}°C</Text>) 
+                  : environment.environment_type == 2 ? (parseFloat(measurements.temp) >= variables.maxVariables.pigs.temp || 
+                  parseFloat(measurements.temp) <= variables.minVariables.pigs.temp ? 
+                  <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
+                  : <Text style={styles.infoGood}>{measurements.temp}°C</Text>) 
+                  : environment.environment_type == 3 ? (parseFloat(measurements.temp) >= variables.maxVariables.horses.temp || 
+                  parseFloat(measurements.temp) <= variables.minVariables.horses.temp ? 
+                  <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
+                  : <Text style={styles.infoGood}>{measurements.temp}°C</Text>) 
+                  : (parseFloat(measurements.temp) >= variables.maxVariables.cows.temp || 
+                  parseFloat(measurements.temp) <= variables.minVariables.cows.temp ? 
+                  <Text style={styles.infoWarning}>{measurements.temp}°C</Text>
+                  : <Text style={styles.infoGood}>{measurements.temp}°C</Text>) }
+                </View>
 
-                {measurements.food == 0 ? <Text style={styles.infoWarning}>{measurements.food} Kg</Text>
-                : <Text style={styles.infoData}>{measurements.food} Kg</Text>}
+                <View style={styles.containerData}>
+                  {measurements.airQuality == "Buena" ? 
+                  <Text style={styles.infoGood}>{measurements.airQuality}</Text>
+                  : ( measurements.airQuality == "Regular" ? <Text style={styles.infoRegular}>{measurements.airQuality}</Text>
+                  : (measurements.airQuality == "Mala" ? <Text style={styles.infoBad}>{measurements.airQuality}</Text>
+                  : <Text style={styles.infoWarning}>{measurements.airQuality}</Text>))}
+                </View>
+
+                <View style={styles.containerData}>
+                  {measurements.food == 0 ? <Text style={styles.infoWarning}>{measurements.food} Kg</Text>
+                  : <Text style={styles.infoGood}>{measurements.food} Kg</Text>}
+                </View>
 
               </View>
             </View>
@@ -269,36 +276,44 @@ const styles = StyleSheet.create({
     color:Colors.white,
     textAlign:'center'
   },
-  infoData:{
-    color:Colors.white,
-    marginTop:15,
-    fontSize:25,
-    marginRight: 20,
-  },
   infoGood:{
-    color:Colors.white,
-    marginTop:15,
+    color:Colors.greenLabel,
+    
     fontSize:25,
     marginRight: 20,
   },
   infoRegular:{
-    color:'#fff033',
-    marginTop:15,
+    color:Colors.yellow,
+    marginLeft:15,
     fontSize:25,
     marginRight: 20,
   },
   infoBad:{
-    color:'#e67e22',
-    marginTop:15,
+    color:Colors.yellow,
+    marginLeft:5,
     fontSize:25,
     marginRight: 20,
   },
   infoWarning:{
     color:Colors.red,
-    marginTop:15,
+    marginLeft:5,
+    alignSelf:'center',
     fontSize:25,
     marginRight: 20,
   },
+  containerData:{
+    backgroundColor:Colors.white,
+    marginBottom:7,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:7,
+    height:35,
+    marginRight:15,
+    borderRadius:5,
+  },
+  containerDatas:{
+    marginTop:6
+  }
 })
 
 export default EnvironmentProfile

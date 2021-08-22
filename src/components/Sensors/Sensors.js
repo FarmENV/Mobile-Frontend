@@ -69,7 +69,7 @@ class Sensors extends React.Component{
           )}
           keyExtractor={(item,index) => index.toString()}
         />
-        <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText} onPress={() => Linking.openURL('https://pedantic-panini-9d6199.netlify.app/contact')}>Obtén tu kit</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSmall}><Text style={styles.buttonText} onPress={() => Linking.openURL('https://pedantic-panini-9d6199.netlify.app/contactCel')}>Obtén tu kit</Text></TouchableOpacity>
       </View>
     )
   }

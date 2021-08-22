@@ -18,6 +18,17 @@ const styles = StyleSheet.create({
     marginBottom:20,
     resizeMode: 'cover',
   },
+  profileImage:{
+    top:60,
+    width:250,
+    height:250,
+    borderRadius:200,
+    borderColor:Colors.green,
+    borderWidth:5,
+    alignSelf:'center',
+    marginBottom:20,
+    resizeMode: 'cover',
+  },
   button:{
     marginVertical:15,
     alignSelf:'center',
@@ -122,7 +133,7 @@ const styles = StyleSheet.create({
   cameraContainer:{
     position:'absolute',
     left:270,
-    top:200,
+    top:-55,
     backgroundColor:Colors.white,
     borderRadius:10,
     borderWidth:1,

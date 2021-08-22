@@ -97,7 +97,7 @@ class EnvironmentEditProfile extends React.Component {
       return <Loader/>
     }
     return(
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.headerContainer}>
           {
             item.environment_type == 1 ? <ImageBackground style={styles.header} source={imageBackgroundChicken}/>
@@ -159,7 +159,7 @@ class EnvironmentEditProfile extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -168,19 +168,19 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     flexDirection:'column',
-    justifyContent:'center'
+    
   },
   header: {
     width:'100%',
-    height:250,
+    height:230,
     flex:2
   },
 
   formContent:{
     flex:3,
     marginHorizontal:50,
-    marginTop:120,
-    marginBottom:40,
+    top:-80,
+    marginBottom:10,
     borderRadius:10,
     minHeight:200,
   },

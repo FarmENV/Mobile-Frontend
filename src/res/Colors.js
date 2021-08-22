@@ -3,9 +3,11 @@ const Colors = {
   white:'#efefef',
   blackPearl:'#20252c',
   green:'#4E7626',
-  yellow:'#F0D08A',
+  yellow:'#ced321',
   buttonBrown: '#471B03',
-  red:'#ff0000',
+  red:'#b00808',
+  greenLabel:'#034c19',
+  
 }
 
 export default Colors
